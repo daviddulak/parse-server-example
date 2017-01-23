@@ -12,13 +12,16 @@ if (!databaseUri) {
 }
 
 var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: databaseUri || 'mongodb://scout:GUWh7soz24Qru64@ds129009-a0.mlab.com:29009,ds129009-a1.mlab.com:29009/scenescoutapp?replicaSet=rs-ds129009',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+  appId: process.env.APP_ID || '61lfdS0vas1F4f8pgry8wgeTgTPgxKbzUivVGZlc',
+  masterKey: process.env.MASTER_KEY || 'r9QPBm7CnFdAQjGJKxrzCpbhVzhW6fsZn32g6CId', //Add your master key here. Keep it secret!
+  clientKey: 'iYBd0Qrh2ZD9h93xHPpS2vm6Si3sNUW4QhZckMbz', // optional
+  restAPIKey: 'vBG74IKBwSssBtmRVPSr2LbTyz4OCRyHMsPCrHgF', // optional
+  appName: 'SceneScout App',
+  serverURL: process.env.SERVER_URL || 'https://scenescout-api.herokuapp.com/parse',  // Don't forget to change to https if needed
   liveQuery: {
-    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+    classNames: ["Scene"] // List of classes to support for query subscriptions
   }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
