@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width">
+  <meta name="apple-itunes-app" content="app-id=738719885">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link href="/css/scenescout.css" rel="stylesheet">
+  <title><%= title %> on SceneScout</title>
+  <meta name="twitter:card" content="photo">
+  <meta name="twitter:site" content="scenescoutapp">
+  <meta name="twitter:title" content="<%= title %>">
+  <% if (locationImages.length > 0) { %>
+  <meta name="twitter:image" content="<%= cloudinaryBaseUrlParallax %><%= locationImages[0] %>">
+  <meta name="og:image" content="<%= cloudinaryBaseUrlParallax %><%= locationImages[0] %>">
+  <meta name="twitter:image:width" content="960">
+  <meta name="twitter:image:height" content="730">
+  <% } %>
+  <% if (user && user.authData && user.authData.twitter && user.authData.twitter.screen_name) {  %>
+  <meta name="twitter:creator" content="<%= user.authData.twitter.screen_name %>">
+  <% } %>
+  <meta name="twitter:app:name:iphone" content="SceneScout">
+  <meta name="twitter:app:name:ipad" content="SceneScout">
+  <meta name="twitter:app:name:googleplay" content="SceneScout">
+  <meta name="twitter:app:id:iphone" content="738719885">
+  <meta name="twitter:app:id:ipad" content="738719885">
+  <meta name="twitter:app:id:googleplay" content="com.scenescoutapp.scenescout">
+  <meta name="og:title" content="<%= title %>">
+  <meta name="og:description" content="The SceneScout app lets you create and share scenes with detailed descriptions, scouted photos, geo tags, genre specific sets, and attach photos from Flickr.">
+  <meta name="fb:app_id" content="545068702188408">
+</head>
+<body>
+<div class="container">
+<div class="scene-banner">
+  <div class="container" style="<% if (locationImages.length > 0) {%>background-image: url(<%= cloudinaryBaseUrlParallax %><%= locationImages[0] %>);<% } %>">
+    <div class="location-images layer" data-depth="0.40">
+      <% for(var i=0; i<locationImages.length; i++) {%>
+         <div class="image simple-load" data-image-url="<%= cloudinaryBaseUrlParallax %><%= locationImages[i] %>"></div>
+      <% } %>
+    </div>
+    <div class="image-count">
+      <% for(var i=0; i<locationImages.length; i++) {%>
+        <span class="dot"></span>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="scene-details">
+  <% if (isFeatured) {%>
+    <div class="scenescout-avatar link"></div>
+    <div class="featured-title profile owner link">Featured by SceneScout</div>
+  <% } else if (userAvatarUrl) {%>
+    <div class="user-avatar profile link show" style="background-image: url(<%= userAvatarUrl %>);"></div>
+  <% } %>
+
+  <div class="scene-info">
+      <div class="title"><%= title %></div>
+      <% if (isFeatured) { %>
+      <div class="credit">Photos by <span class="username attribution profile link"><% if (attributionUser.name) { %><%= attributionUser.name %><% } else { %><%= attributionUser.username %><% } %></span></div>
+      <% } else { %>
+      <div class="credit">Photos by <span class="username profile link"><% if (user.name) { %><%= user.name %><% } else { %><%= user.username %><% } %></span></div>
+      <% } %>
+
+      <% if (description) { %><div class="description<% if (isDescriptionLongform) { %> longform<% } %>"><%= description %></div><% } %>
+
+    <% if (locationText) { %><a target="_blank" class="location" href="https://maps.google.com/?q=<%= location.latitude %>,<%= location.longitude %>"><%= locationText %></a><% } %>
+  </div>
+
+  <div class="stats">
+      <div class="stat views">
+        <span class="icon ss-standard">&#x1F440;</span>
+        <span class="icon value"><%= viewCount %></span>
+      </div>
+      <div class="stat likes">
+        <span class="icon ss-standard">&#x2665;</span>
+        <span class="icon value"><%= likes.length %></span>
+      </div>
+      <div class="stat examples">
+        <span class="icon ss-standard">&#x1F4F7;</span>
+        <span class="icon value"><%= gallery.length %></span>
+      </div>
+  </div>
+
+  <div class="sun-details fun-with-sun">
+      <div class="detail sunrise" data-value="sunrise"></div>
+      <div class="detail now goldenhour" data-value="8:02"></div>
+      <div class="detail sunset" data-value="sunset"></div>
+  </div>
+
+
+  <div class="grid-view-container" data-count="{@size key=gallery}{/size}">
+      <div class="scene-borders grid-child-view grid-container"></div>
+  </div>
+
+</div>
+
+<div class="downloads orange">
+  <div class="heading">Download Now</div>
+  <a class="download" target="_blank" href="https://itunes.apple.com/us/app/scenescout/id738719885?ls=1&amp;mt=8">
+    <h2 class="getItNow"><span class="prefix">for</span> iPhone</h2>
+  </a>
+  <a class="download" target="_blank" href="https://play.google.com/store/apps/details?id=com.scenescoutapp.scenescout&amp;hl=en">
+    <h2 class="getItNow"><span class="prefix">for</span> Android 4.4+</h2>
+  </a>
+</div>
+
+<footer>
+  <div class="social">
+    <a href="https://twitter.com/SceneScoutApp" target="_blank">
+      <div class="twitter"></div>
+    </a>
+    <a href="https://www.facebook.com/SceneScout" target="_blank">
+      <div class="fb"></div>
+    </a>
+     <a href="mailto:support@scenescout.com">
+      <div class="email"></div>
+    </a>
+  </div>
+  <p class="copyRight">&copy; <%= (new Date()).getFullYear() %> SceneScout LLC, All Rights Reserved.</p>
+</footer>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43621508-1', 'scenescout.parseapp.com');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>

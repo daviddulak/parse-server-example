@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width">
+  <meta name="apple-itunes-app" content="app-id=738719885">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link href="/css/scenescout.css" rel="stylesheet">
+  <title><% if (title) { %><%= title %>: <% } %>A Set on SceneScout</title>
+  <meta name="twitter:card" content="photo">
+  <meta name="twitter:site" content="scenescoutapp">
+  <meta name="twitter:title" content="<%= title %>">
+  <% if (imageUrl.length) { %>
+  <meta name="twitter:image" content="<%= cloudinaryBaseUrlParallax %><%= imageUrl %>">
+  <meta name="og:image" content="<%= cloudinaryBaseUrlParallax %><%= imageUrl %>">
+  <meta name="twitter:image:width" content="960">
+  <meta name="twitter:image:height" content="730">
+  <% } %>
+  <% if (user && user.authData && user.authData.twitter && user.authData.twitter.screen_name) {  %>
+  <meta name="twitter:creator" content="<%= user.authData.twitter.screen_name %>">
+  <% } %>
+  <meta name="twitter:app:name:iphone" content="SceneScout">
+  <meta name="twitter:app:name:ipad" content="SceneScout">
+  <meta name="twitter:app:name:googleplay" content="SceneScout">
+  <meta name="twitter:app:id:iphone" content="738719885">
+  <meta name="twitter:app:id:ipad" content="738719885">
+  <meta name="twitter:app:id:googleplay" content="com.scenescoutapp.scenescout">
+  <meta name="og:title" content="<%= title %>">
+  <meta name="og:description" content="The SceneScout app lets you create and share your genre specific sets. Sets are a list of similar locations that will help you plan a multi-location shoot or just a list of your favorite locations.">
+  <meta name="fb:app_id" content="545068702188408">
+</head>
+<body>
+<div class="container">
+  <div class="top-container">
+  <div class="map-overlay">
+    <% if (title) { %>
+      <div class="title"><%= title %></div>
+    <% } %>
+    <div class="credit">A Set by <span class="username"><% if (user.name) { %><%= user.name %><% } else { %><%= user.username %><% } %></span></div>
+  </div>
+  <div class="static-map-child-view" style="background-image: url(http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyARPUF8zdPXc7I8QcgmETcHLmSZT3nJLQ4&size=750x305&markers=icon:http://scenescoutapp.com/marker.png%7Cshadow:false%7C<% for (var i=0, length=scenes.length; i < length; ++i) { %><% if (scenes[i].latitude) { %><%= scenes[i].latitude %>,<%= scenes[i].longitude %>%7C<% } } %>&sensor=false&style=feature:landscape.man_made%7Celement:all%7Chue:0xfcf9f2%7Csaturation:49%7Clightness:71%7Cvisibility:simplified&style=feature:road.highway%7Celement:geometry%7Chue:0x98a3a6%7Csaturation:-93%7Clightness:-3%7Cvisibility:on&style=feature:water%7Celement:all%7Chue:0xb4c1c4%7Csaturation:-73%7Clightness:-3%7Cvisibility:on&style=feature:poi.park%7Celement:geometry%7Chue:0x9eafac%7Csaturation:-78%7Clightness:-16%7Cvisibility:on&style=feature:poi.school%7Celement:all%7Chue:0xebebeb%7Csaturation:-100%7Clightness:54%7Cvisibility:on&style=feature:road.arterial%7Celement:all%7Chue:0xdedede%7Csaturation:-100%7Clightness:44%7Cvisibility:on&style=feature:road.highway%7Celement:labels%7Chue:0xb5b5b5%7Csaturation:-100%7Clightness:19%7Cvisibility:simplified);"></div>
+</div>
+
+<div class="set-content">
+  <div class="grid-child-view grid-container"></div>
+  <div class="list-child-view">
+  <% for (var i=0, l=scenes.length; i < l; ++i) { %>
+    <a class="item scene list link" href="/scene/share/<%= scenes[i].objectId %>">
+      <div class="images" data-count="<%= scenes[i].locationImages.length %>">
+        <% for (var j=0, m=scenes[i].locationImages.length; j < m; ++j) { %>
+          <div class="image" style="background-image: url(<%= cloudinaryBaseUrlSmall %><%= scenes[i].locationImages[j] %>);"></div>
+        <% } %>
+      </div>
+      <div class="content<% if (scenes[i].description) { %> hasDescription<% } %>">
+        <div class="title"><%= scenes[i].title %></div>
+        <div class="description"><%= scenes[i].descriptionTruncated %></div>
+        <% if (scenes[i].locationText) { %><div class="location"><%= scenes[i].locationText %></div><% } %>
+      </div>
+    </a>
+  <% } %>
+  </div>
+</div>
+
+<div class="downloads orange">
+  <div class="heading">Download Now</div>
+  <a class="download" target="_blank" href="https://itunes.apple.com/us/app/scenescout/id738719885?ls=1&amp;mt=8">
+    <h2 class="getItNow"><span class="prefix">for</span> iPhone</h2>
+  </a>
+  <a class="download" target="_blank" href="https://play.google.com/store/apps/details?id=com.scenescoutapp.scenescout&amp;hl=en">
+    <h2 class="getItNow"><span class="prefix">for</span> Android 4.4+</h2>
+  </a>
+</div>
+
+<footer>
+  <div class="social">
+    <a href="https://twitter.com/SceneScoutApp" target="_blank">
+      <div class="twitter"></div>
+    </a>
+    <a href="https://www.facebook.com/SceneScout" target="_blank">
+      <div class="fb"></div>
+    </a>
+     <a href="mailto:support@scenescout.com">
+      <div class="email"></div>
+    </a>
+  </div>
+  <p class="copyRight">&copy; <%= (new Date()).getFullYear() %> SceneScout LLC, All Rights Reserved.</p>
+</footer>
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43621508-1', 'scenescout.parseapp.com');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
