@@ -1,6 +1,6 @@
 
-cloudinary = require("cloud/cloudinary/all");
-_ = require('cloud/cloudinary/lib/underscore');
+cloudinary = require("./cloudinary/all");
+_ = require('./cloudinary/lib/underscore');
 
 // cloudinary.config({
 //   api_key: '276766523122281',
@@ -8,7 +8,7 @@ _ = require('cloud/cloudinary/lib/underscore');
 // });
 
 Parse.Cloud.define("cloudinaryEXIF", function(request, response) {
-  var cloudinary_config = require('cloud/cloudinary_config').config;
+  var cloudinary_config = require('./cloudinary_config').config;
   request = JSON.parse(request['body']);
   var exifData = {};
   var id = request['id'];
@@ -103,7 +103,7 @@ Parse.Cloud.define("cloudinaryImageList", function(request, response) {
 
   var _getImagesCloudinary = function() {
     var promise = new Parse.Promise();
-    var cloudinary_config = require('cloud/cloudinary_config').config;
+    var cloudinary_config = require('./cloudinary_config').config;
 
     var url = 'https://'+cloudinary_config.api_key+':'+cloudinary_config.api_secret+'@api.cloudinary.com/v1_1/scene-scout/resources/image?max_results=500';
 
