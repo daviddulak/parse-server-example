@@ -2,11 +2,11 @@
 (function() {
   var api_sign_request, build_array, build_custom_headers, build_eager, build_upload_params, config, generate_transformation_string, get_api_url, option_consume, present, sha1, timestamp, _;
 
-  _ = require('cloud/cloudinary/lib/underscore');
+  _ = require('./lib/underscore');
 
-  sha1 = require('cloud/cloudinary/lib/crypto/sha1');
+  sha1 = require('./lib/crypto/sha1');
 
-  config = require('cloud/cloudinary/config.js');
+  config = require('./config.js');
 
   exports.sign_upload_request = function(params) {
     var api_secret, k, v;

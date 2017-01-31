@@ -11,7 +11,7 @@
 
     if (cloudinary_config === void 0 || new_config === true) {
       try {
-        cloudinary_config = require('cloud/cloudinary_config').config;
+        cloudinary_config = require('../cloudinary_config').config;
       } catch (_error) {
         err = _error;
         console.log("Couldn't find configuration file at 'cloud/cloudinary_config.js'");
