@@ -1,4 +1,5 @@
 
+require('./app.js');
 cloudinary = require("./cloudinary/all");
 _ = require('./cloudinary/lib/underscore');
 
