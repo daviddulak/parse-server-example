@@ -2,7 +2,7 @@
 (function() {
   var cloudinary_config, _;
 
-  _ = require("cloud/cloudinary/lib/underscore");
+  _ = require("./lib/underscore");
 
   cloudinary_config = void 0;
 
