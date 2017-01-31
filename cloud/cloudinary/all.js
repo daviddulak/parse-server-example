@@ -1,4 +1,4 @@
-_ = require('cloud/cloudinary/lib/underscore.js')
+_ = require('./cloudinary/lib/underscore.js');
 
-_.extend(exports, require('cloud/cloudinary/sign.js'))
-exports.config = require('cloud/cloudinary/config.js')
+_.extend(exports, require('./cloudinary/sign.js'));
+exports.config = require('./cloudinary/config.js');
