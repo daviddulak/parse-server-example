@@ -91,7 +91,8 @@ app.get('/scene/share/:id', function(req, res) {
       console.log(error);
     // The object was not retrieved successfully.
     // error is a Parse.Error with an error code and description.
-    }
+    },
+    useMasterKey: true
   });
 });
 
@@ -146,7 +147,8 @@ app.get('/set/share/:id', function(req, res) {
       console.log(error);
     // The object was not retrieved successfully.
     // error is a Parse.Error with an error code and description.
-    }
+    },
+    useMasterKey: true
   });
 //*/
 });
