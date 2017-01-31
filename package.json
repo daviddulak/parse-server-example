@@ -13,7 +13,8 @@
     "kerberos": "~0.0.x",
     "parse": "~1.8.0",
     "parse-server": "*",
-    "ejs": "2.5.5"
+    "ejs": "2.5.5",
+    "body-parser": "1.16.0"
   },
   "scripts": {
     "start": "node index.js"
