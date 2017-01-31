@@ -2,8 +2,6 @@
 cloudinary = require("./cloudinary/all");
 _ = require('./cloudinary/lib/underscore');
 
-
-
 Parse.Cloud.define("cloudinaryEXIF", function(request, response) {
   var cloudinary_config = require('./cloudinary_config').config;
   request = JSON.parse(request['body']);
@@ -145,44 +143,44 @@ Parse.Cloud.define("cloudinaryImageList", function(request, response) {
 
 });
 
-// Parse.Cloud.define("sign_upload_request", function(request, response) {
-//     if (!request.user || !request.user.authenticated()) {
-//         response.error("Needs an authenticated user");
-//         return;
-//     }
-//     response.success(
-//         cloudinary.sign_upload_request({tags: request.user.getUsername()})
-//     );
-// });
+Parse.Cloud.define("sign_upload_request", function(request, response) {
+    if (!request.user || !request.user.authenticated()) {
+        response.error("Needs an authenticated user");
+        return;
+    }
+    response.success(
+        cloudinary.sign_upload_request({tags: request.user.getUsername()})
+    );
+});
 
-// Parse.Cloud.define("sign_delete_request", function(request, response) {
-//     var body = JSON.parse(request['body']);
-//     response.success(
-//         cloudinary.sign_upload_request({public_id: body.public_id})
-//     );
-// });
+Parse.Cloud.define("sign_delete_request", function(request, response) {
+    var body = JSON.parse(request['body']);
+    response.success(
+        cloudinary.sign_upload_request({public_id: body.public_id})
+    );
+});
 
-// Parse.Cloud.define("delete_cloudinary_file", function(request, response) {
-//     var body = JSON.parse(request['body']);
-//     console.log(body);
-//     response.success(
-//         deleteCloudinaryFile(body.public_id)
-//     );
-// });
+Parse.Cloud.define("delete_cloudinary_file", function(request, response) {
+    var body = JSON.parse(request['body']);
+    console.log(body);
+    response.success(
+        deleteCloudinaryFile(body.public_id)
+    );
+});
 
-// function deleteCloudinaryFile(id) {
-//   var signResponse = cloudinary.sign_upload_request({public_id: id});
-//   Parse.Cloud.httpRequest({
-//     url: 'https://api.cloudinary.com/v1_1/scene-scout/image/destroy',
-//     type: 'POST',
-//     params: {
-//       "timestamp": signResponse.timestamp,
-//       "signature": signResponse.signature,
-//       "api_key": signResponse.api_key,
-//       "public_id": signResponse.public_id
-//     }
-//   });
-// }
+function deleteCloudinaryFile(id) {
+  var signResponse = cloudinary.sign_upload_request({public_id: id});
+  Parse.Cloud.httpRequest({
+    url: 'https://api.cloudinary.com/v1_1/scene-scout/image/destroy',
+    type: 'POST',
+    params: {
+      "timestamp": signResponse.timestamp,
+      "signature": signResponse.signature,
+      "api_key": signResponse.api_key,
+      "public_id": signResponse.public_id
+    }
+  });
+}
 
 function parseCloudinaryId(formatted) {
   var split = formatted.split('/');
